@@ -5,4 +5,4 @@
 
 ## To Do
 - [ ] 앱 메인 화면
-- [ ] 실시간 전철 운행 정보
+- [ ] 실시간 전철 운행 정보(https://github.com/hyeon-js/subway)
