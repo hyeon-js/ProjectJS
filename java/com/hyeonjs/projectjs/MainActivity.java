@@ -2,6 +2,7 @@ package com.hyeonjs.projectjs;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -26,12 +27,17 @@ public class MainActivity extends AppCompatActivity {
             btns[n] = new Button(this);
             btns[n].setText(menus[n]);
             btns[n].setId(n);
-            btns[n].setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    switch (v.getId()) {
-
-                    }
+            btns[n].setOnClickListener(v -> {
+                Intent intent;
+                switch (v.getId()) {
+                    case 0:
+                        intent = new Intent(this, SubwayActivity.class);
+                        startActivity(intent);
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
                 }
             });
             layout.addView(btns[n]);
