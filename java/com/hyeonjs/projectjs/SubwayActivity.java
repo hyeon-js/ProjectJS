@@ -65,7 +65,7 @@ public class SubwayActivity extends AppCompatActivity {
         final String[] lines = {"1호선", "2호선", "3호선", "4호선", "5호선", "6호선", "7호선", "8호선", "9호선",
                 "경의·중앙선", "수인·분당선", "신분당선", "경춘선", "용인경전철 (에버라인)", "의정부경전철", "경강선",
                 "우이신설선", "서해선", "김포골드라인", "신림선",
-                "공항철도", "인천1호선", "인천2호선", "닫기"};
+                "공항철도", "인천1호선", "인천2호선", "GTX - A", "닫기"};
         ListView list = new ListView(this);
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, lines);
         list.setAdapter(adapter);
