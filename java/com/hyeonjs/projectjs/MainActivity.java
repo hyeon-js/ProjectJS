@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         TextView dev = new TextView(this);
-        dev.setText("© 2022-2024 Hyeon.js, All rights reserved.");
+        dev.setText("© 2022-2025 Hyeon.js, All rights reserved.");
         dev.setTextSize(12);
         dev.setGravity(Gravity.CENTER);
         dev.setPadding(0, dip2px(8), 0, dip2px(8));
