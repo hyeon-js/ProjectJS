@@ -65,7 +65,7 @@ public class SubwayActivity extends AppCompatActivity {
         final String[] lines = {"수도권 1호선", "수도권 2호선", "수도권 3호선", "수도권 4호선", "수도권 5호선", "수도권 6호선", "수도권 7호선", "수도권 8호선", "수도권 9호선",
                 "경의·중앙선", "수인·분당선", "신분당선", "경춘선", "용인경전철 (에버라인)", "의정부경전철", "경강선",
                 "우이신설선", "서해선", "김포골드라인", "신림선", "공항철도", "인천1호선", "인천2호선", "GTX - A", //23
-
+                "부산 1호선", "부산 2호선", "부산 3호선", "부산 4호선", //27
                 "대구 1호선", "대구 2호선", "대구 3호선", "대경선",
                 "닫기"};
         final int[] lineIds = {
@@ -79,8 +79,11 @@ public class SubwayActivity extends AppCompatActivity {
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, lines);
         list.setAdapter(adapter);
         list.setOnItemClickListener((adapterView, view, pos, id) -> {
-            if (pos < 24) web.loadUrl("javascript:loadData('seoul', " + lineIds[pos]+ ");");
-            else if (pos < 28) web.loadUrl("javascript:loadData('daegu', " + lineIds[pos] + ");");
+            if (pos < lines.length - 1) {
+                if (pos < 24) web.loadUrl("javascript:loadData('seoul', " + lineIds[pos] + ");");
+                else if (pos < 28) web.loadUrl("javascript:loadData('busan', " + lineIds[pos] + ");");
+                else web.loadUrl("javascript:loadData('daegu', " + lineIds[pos] + ");");
+            }
             drawer.closeDrawer(Gravity.LEFT);
         });
         layout.addView(list);
