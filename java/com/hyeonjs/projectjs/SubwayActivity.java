@@ -65,13 +65,15 @@ public class SubwayActivity extends AppCompatActivity {
         final String[] lines = {"수도권 1호선", "서울 2호선", "수도권 3호선", "수도권 4호선", "수도권 5호선", "서울 6호선", "서울 7호선", "수도권 8호선", "서울 9호선",
                 "경의·중앙선", "수인·분당선", "신분당선", "경춘선", "용인경전철 (에버라인)", "의정부경전철", "경강선",
                 "우이신설선", "서해선", "김포골드라인", "신림선", "공항철도", "인천1호선", "인천2호선", "GTX - A", //23
-                "부산 1호선", "부산 2호선", "부산 3호선", "부산 4호선", //27
+                "부산 1호선", "부산 2호선", "부산 3호선", "부산 4호선", "동해선", "부산김해경전철", //29
                 "대구 1호선", "대구 2호선", "대구 3호선", "대경선",
                 "닫기"};
         final int[] lineIds = {
                 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009,
                 1101, 1102, 1103, 1104, 1105, 1106, 1107,
                 1108, 1109, 1110, 1111, 1500, 1501, 1502, 1601,
+
+                1001, 1002, 1003, 1004, 1101, 1102,
 
                 1001, 1002, 1003, 1101
         };
@@ -81,7 +83,7 @@ public class SubwayActivity extends AppCompatActivity {
         list.setOnItemClickListener((adapterView, view, pos, id) -> {
             if (pos < lines.length - 1) {
                 if (pos < 24) web.loadUrl("javascript:loadData('seoul', " + lineIds[pos] + ");");
-                else if (pos < 28) web.loadUrl("javascript:loadData('busan', " + lineIds[pos] + ");");
+                else if (pos < 30) web.loadUrl("javascript:loadData('busan', " + lineIds[pos] + ");");
                 else web.loadUrl("javascript:loadData('daegu', " + lineIds[pos] + ");");
             }
             drawer.closeDrawer(Gravity.LEFT);
