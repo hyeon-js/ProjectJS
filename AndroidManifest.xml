@@ -24,6 +24,8 @@
         </activity>
         <activity android:name=".SubwayActivity"
             android:label="실시간 전철 운행정보"></activity>
+        <activity android:name=".SpeedmeterActivity"
+            android:label="속력 측정기"></activity>
     </application>
 
 </manifest>

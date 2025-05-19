@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case 1:
+                        intent = new Intent(this, SpeedmeterActivity.class);
+                        startActivity(intent);
                         break;
                     case 2:
                         break;
