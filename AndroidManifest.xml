@@ -23,8 +23,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".SubwayActivity"
+            android:configChanges="orientation|screenSize"
             android:label="실시간 전철 운행정보"></activity>
         <activity android:name=".SpeedmeterActivity"
+            android:configChanges="orientation|screenSize"
             android:label="속력 측정기"></activity>
     </application>
 
