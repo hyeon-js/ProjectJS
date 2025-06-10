@@ -3,11 +3,13 @@ package com.hyeonjs.projectjs;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -18,7 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class SpeedmeterActivity extends AppCompatActivity {
 
     private LocationListener listener;
-    private TextView txt;
+    private WebView web;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +28,20 @@ public class SpeedmeterActivity extends AppCompatActivity {
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(1);
 
-        txt = new TextView(this);
-        txt.setText("속도 측정 전");
-        txt.setTextSize(32);
-        txt.setGravity(Gravity.CENTER);
-        layout.addView(txt);
+        web = new WebView(this);
+        web.setBackgroundColor(Color.TRANSPARENT);
+        StringBuilder str = new StringBuilder("<meta name='viewport' content='user-scalable=no width=device-width' />")
+                .append("<style>table{border-top: 1px solid black; color: black; border-collapse: collapse; text-align: center;}\n" +
+                        "td{border-bottom: 1px solid black; padding: 16px; font-size: 32px;}</style>")
+                .append("<table width=100%>")
+                .append("<tr align=center><td>속력 측정 전</td></tr>")
+                .append("</table>");
+        if (Build.VERSION.SDK_INT > 23) {
+            web.loadDataWithBaseURL(null, str.toString(), "text/html; charset=UTF-8", null, null);
+        } else {
+            web.loadData(str.toString(), "text/html; charset=UTF-8", null);
+        }
+        layout.addView(web);
 
         TextView dev = new TextView(this);
         dev.setText("© 2022-2025 Hyeon.js, All rights reserved.");
@@ -56,9 +67,9 @@ public class SpeedmeterActivity extends AppCompatActivity {
         }
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         listener = location -> {
-            float speed = location.getSpeed();
-            txt.setText(round(speed) + " m/s\n" + round(speed * 3.6) + " km/h\n" +
-                    round(speed * 1.944) + " knot\n" + round(speed * 2.237) + " mph");
+            updateScreen(location.getSpeed());
+//            txt.setText(round(speed) + " m/s\n" + round(speed * 3.6) + " km/h\n" +
+//                    round(speed * 1.944) + " knot\n" + round(speed * 2.237) + " mph");
         };
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, listener);
         lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, listener);
@@ -68,6 +79,23 @@ public class SpeedmeterActivity extends AppCompatActivity {
         if (listener == null) return;
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         lm.removeUpdates(listener);
+    }
+
+    private void updateScreen(float speed) {
+        StringBuilder str = new StringBuilder("<meta name='viewport' content='user-scalable=no width=device-width' />")
+                .append("<style>table{border-top: 1px solid black; color: black; border-collapse: collapse; text-align: center;}\n" +
+                        "td{border-bottom: 1px solid black; padding: 16px; font-size: 32px;}</style>")
+                .append("<table width=100%>")
+                .append("<tr align=center><td>" + round(speed) + "</td><td>m/s</td></tr>")
+                .append("<tr align=center><td>" + round(speed * 3.6) + "</td><td>km/h</td></tr>")
+                .append("<tr align=center><td>" + round(speed * 1.944) + "</td><td>knot</td></tr>")
+                .append("<tr align=center><td>" + round(speed * 22.237) + "</td><td>mph</td></tr>")
+                .append("</table>");
+        if (Build.VERSION.SDK_INT > 23) {
+            web.loadDataWithBaseURL(null, str.toString(), "text/html; charset=UTF-8", null, null);
+        } else {
+            web.loadData(str.toString(), "text/html; charset=UTF-8", null);
+        }
     }
 
     private String round(double num) {
